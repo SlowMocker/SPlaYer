@@ -3,12 +3,16 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		FF3E8A7F2509C56A0098FAF9 /* SPlaYer.m in Sources */ = {isa = PBXBuildFile; fileRef = FF3E8A7E2509C56A0098FAF9 /* SPlaYer.m */; };
 		FF3E8A802509C56A0098FAF9 /* SPlaYer.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = FF3E8A7D2509C56A0098FAF9 /* SPlaYer.h */; };
+		FF3E8A882509C6720098FAF9 /* libMPlaYer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FF3E8A872509C6720098FAF9 /* libMPlaYer.a */; platformFilter = ios; settings = {ATTRIBUTES = (Required, ); }; };
+		FF3E8A8A2509C6720098FAF9 /* libQPlayAutoSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FF3E8A892509C6720098FAF9 /* libQPlayAutoSDK.a */; platformFilter = ios; settings = {ATTRIBUTES = (Required, ); }; };
+		FF3E8A8E250A13BA0098FAF9 /* QPlayHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = FF3E8A8D250A13BA0098FAF9 /* QPlayHandler.m */; };
+		FF3E8A91250A183C0098FAF9 /* QMediaDesc.m in Sources */ = {isa = PBXBuildFile; fileRef = FF3E8A90250A183C0098FAF9 /* QMediaDesc.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -28,6 +32,12 @@
 		FF3E8A7A2509C56A0098FAF9 /* libSPlaYer.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libSPlaYer.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF3E8A7D2509C56A0098FAF9 /* SPlaYer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SPlaYer.h; sourceTree = "<group>"; };
 		FF3E8A7E2509C56A0098FAF9 /* SPlaYer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SPlaYer.m; sourceTree = "<group>"; };
+		FF3E8A872509C6720098FAF9 /* libMPlaYer.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libMPlaYer.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		FF3E8A892509C6720098FAF9 /* libQPlayAutoSDK.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libQPlayAutoSDK.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		FF3E8A8C250A13BA0098FAF9 /* QPlayHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QPlayHandler.h; sourceTree = "<group>"; };
+		FF3E8A8D250A13BA0098FAF9 /* QPlayHandler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QPlayHandler.m; sourceTree = "<group>"; };
+		FF3E8A8F250A183C0098FAF9 /* QMediaDesc.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QMediaDesc.h; sourceTree = "<group>"; };
+		FF3E8A90250A183C0098FAF9 /* QMediaDesc.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QMediaDesc.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,6 +45,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FF3E8A882509C6720098FAF9 /* libMPlaYer.a in Frameworks */,
+				FF3E8A8A2509C6720098FAF9 /* libQPlayAutoSDK.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -46,6 +58,7 @@
 			children = (
 				FF3E8A7C2509C56A0098FAF9 /* SPlaYer */,
 				FF3E8A7B2509C56A0098FAF9 /* Products */,
+				FF3E8A862509C6720098FAF9 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -60,10 +73,31 @@
 		FF3E8A7C2509C56A0098FAF9 /* SPlaYer */ = {
 			isa = PBXGroup;
 			children = (
+				FF3E8A8B2509C7F40098FAF9 /* QPlay */,
 				FF3E8A7D2509C56A0098FAF9 /* SPlaYer.h */,
 				FF3E8A7E2509C56A0098FAF9 /* SPlaYer.m */,
 			);
 			path = SPlaYer;
+			sourceTree = "<group>";
+		};
+		FF3E8A862509C6720098FAF9 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FF3E8A872509C6720098FAF9 /* libMPlaYer.a */,
+				FF3E8A892509C6720098FAF9 /* libQPlayAutoSDK.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FF3E8A8B2509C7F40098FAF9 /* QPlay */ = {
+			isa = PBXGroup;
+			children = (
+				FF3E8A8C250A13BA0098FAF9 /* QPlayHandler.h */,
+				FF3E8A8D250A13BA0098FAF9 /* QPlayHandler.m */,
+				FF3E8A8F250A183C0098FAF9 /* QMediaDesc.h */,
+				FF3E8A90250A183C0098FAF9 /* QMediaDesc.m */,
+			);
+			path = QPlay;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -123,7 +157,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FF3E8A8E250A13BA0098FAF9 /* QPlayHandler.m in Sources */,
 				FF3E8A7F2509C56A0098FAF9 /* SPlaYer.m in Sources */,
+				FF3E8A91250A183C0098FAF9 /* QMediaDesc.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -245,10 +281,11 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2CTFS25UCD;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -257,10 +294,11 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2CTFS25UCD;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
