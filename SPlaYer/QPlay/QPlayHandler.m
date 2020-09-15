@@ -9,9 +9,7 @@
 #import "QPlayHandler.h"
 #import "QPlayAutoSDK.h"
 #import "QPlayAutoManager.h"
-
-#import <MPlaYer/MPcmPlaYer.h>
-
+#import "MPcmPlaYer.h"
 #import "QMediaDesc.h"
 
 @interface QPlayHandler ()
@@ -151,7 +149,7 @@
                 self.mPcmPlayer.allBufferNullCallback = ^{
                     __strong typeof(weakSelf) self = weakSelf;
                     if (self.dataDidRequestFinish) {
-                        [self callbackStatus:MPlaYerStatusSTOP];
+                        [self callbackStatus:MPlaYerStatusEND];
                     }
                 };
                 [self.mPcmPlayer prepareToPlay:[self asbdFromQDic:dict]];

@@ -7,7 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <MPlaYer/MPlaYer.h>
+#import "MPlaYer.h"
+#import "QPlayAutoSDK.h"
+#import "QPlayAutoManager.h"
 
 @interface SPlaYer : NSObject
 /// 是否只是抓取 PCM

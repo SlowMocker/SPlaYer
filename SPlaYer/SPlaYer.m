@@ -7,8 +7,6 @@
 //
 
 #import "SPlaYer.h"
-#import "QPlayAutoSDK.h"
-#import "QPlayAutoManager.h"
 #import "QPlayHandler.h"
 
 typedef NS_ENUM(NSInteger, SourceType) {

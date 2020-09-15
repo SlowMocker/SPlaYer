@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <AVFoundation/AVFoundation.h>
-#import <MPlaYer/MPlaYer.h>
+#import "MPlaYer.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
