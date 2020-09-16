@@ -12,8 +12,6 @@
 		FF3E8A8E250A13BA0098FAF9 /* QPlayHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = FF3E8A8D250A13BA0098FAF9 /* QPlayHandler.m */; };
 		FF3E8A91250A183C0098FAF9 /* QMediaDesc.m in Sources */ = {isa = PBXBuildFile; fileRef = FF3E8A90250A183C0098FAF9 /* QMediaDesc.m */; };
 		FF8A95EA250F36640041926E /* SPlaYer.h in Headers */ = {isa = PBXBuildFile; fileRef = FF3E8A7D2509C56A0098FAF9 /* SPlaYer.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		FF8A9667250F47DF0041926E /* libMPlaYer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FF8A9666250F47DF0041926E /* libMPlaYer.a */; };
-		FF8A9669250F47DF0041926E /* libQPlayAutoSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FF8A9668250F47DF0041926E /* libQPlayAutoSDK.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -39,6 +37,8 @@
 		FF3E8A90250A183C0098FAF9 /* QMediaDesc.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QMediaDesc.m; sourceTree = "<group>"; };
 		FF8A9666250F47DF0041926E /* libMPlaYer.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libMPlaYer.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF8A9668250F47DF0041926E /* libQPlayAutoSDK.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libQPlayAutoSDK.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		FF8AAF972510EE33003C491C /* libMPlaYer.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libMPlaYer.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		FF8AAF992510EE33003C491C /* libQPlayAutoSDK.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libQPlayAutoSDK.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -46,8 +46,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FF8A9667250F47DF0041926E /* libMPlaYer.a in Frameworks */,
-				FF8A9669250F47DF0041926E /* libQPlayAutoSDK.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -84,6 +82,8 @@
 		FF3E8A862509C6720098FAF9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FF8AAF972510EE33003C491C /* libMPlaYer.a */,
+				FF8AAF992510EE33003C491C /* libQPlayAutoSDK.a */,
 				FF8A9666250F47DF0041926E /* libMPlaYer.a */,
 				FF8A9668250F47DF0041926E /* libQPlayAutoSDK.a */,
 			);

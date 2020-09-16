@@ -9,6 +9,7 @@
 #import "QPlayHandler.h"
 #import "QPlayAutoSDK.h"
 #import "QPlayAutoManager.h"
+#import "QMMacros.h"
 #import "MPcmPlaYer.h"
 #import "QMediaDesc.h"
 
@@ -57,11 +58,10 @@
     NSOperation *op = [NSBlockOperation blockOperationWithBlock:^{
         __strong typeof(weakSelf) self = weakSelf;
         // 检查是否是最后一个包
-        if (self.requestInfo.didRequestLength >= self.requestInfo.totalLength) {
-            self.dataDidRequestFinish = YES;
+        if (self.dataDidRequestFinish) {
             return;
         }
-        self.dataDidRequestFinish = NO;
+
         
 //        NSLog(@"*-*开始获取 index: %d", (int)self.requestInfo.nextRequestIndex);
         
@@ -77,11 +77,24 @@
                 // 叠加计算已读数据量
                 NSDictionary *desc = dict[@"descDic"];
                 self.onePackageDesc = [[QMediaDesc alloc] initWithDic:desc];
+//                NSLog(@"didRequestLength(%ld) + onePackageLength(%ld) = %ld",self.requestInfo.didRequestLength, self.onePackageDesc.length, self.requestInfo.didRequestLength + self.onePackageDesc.length);
                 self.requestInfo.didRequestLength += self.onePackageDesc.length;
                 
+                NSInteger value = self.requestInfo.didRequestLength - self.requestInfo.totalLength;
+                // 1. 总长超了是最后一个包
+#warning "Maybe Error!!!"
+                // 2. 接收实际 PCM 长度小于 MediaInfo 中标识的总长（无法100%囊括）
+                // 3. buffer 填充不满表示最后一个包
+                // 这里 value >= 0 || value > -3000 只是为了更好的描述而已
+                if (value >= 0 || value > -3000 || self.onePackageDesc.length < PCMBufSize) {
+                    self.dataDidRequestFinish = YES;
+                }
+
                 NSData *pcmData = dict[@"pcmData"];
+                if (value > 0) {
+                    pcmData = [pcmData subdataWithRange:NSMakeRange(0, pcmData.length - value)];
+                }
                 
-                //                __strong typeof(weakSelf) self = weakSelf;
                 AudioBuffer buffer;
                 buffer.mData = (short *)pcmData.bytes;
                 buffer.mDataByteSize = (uint32_t)pcmData.length;
@@ -146,14 +159,49 @@
                 
                 self.mPcmPlayer = [[MPcmPlaYer alloc]init];
                 self.pcmCallback = self.mPcmPlayer.pcmCallback;
+                
                 self.mPcmPlayer.allBufferNullCallback = ^{
                     __strong typeof(weakSelf) self = weakSelf;
+                    NSLog(@"*\n\n\nall buffer null : requestDidFinsh -> %d\n\n\n*", self.dataDidRequestFinish);
                     if (self.dataDidRequestFinish) {
                         [self callbackStatus:MPlaYerStatusEND];
+                        return YES;
                     }
+                    return NO;
                 };
                 [self.mPcmPlayer prepareToPlay:[self asbdFromQDic:dict]];
                 [self.mPcmPlayer play];
+            }
+            else {
+                /*
+                 QPlayAuto_OK=0,                             //成功
+                 QPlayAuto_QueryAutoFailed=100,              //查询车机信息失败
+                 QPlayAuto_QueryMobileFailed=101,            //查询移动设备失败
+                 QPlayAuto_QuerySongsFailed_WithoutID=102,   //查询歌单数据失败,父 ID 不存在
+                 QPlayAuto_QuerySongsFailed_NoNetwork=103,   //查询歌单数据失败,移动设备网络不通,无法下载数据
+                 QPlayAuto_QuerySongsFailed_Unknow=104,      //查询歌单数据失败,原因未知
+                 QPlayAuto_SongIDError=105,                  //歌曲 ID 不存在
+                 QPlayAuto_ReadError=106,                    //读取数据错误
+                 QPlayAuto_ParamError=107,                   //参数错误
+                 QPlayAuto_SystemError=108,                  //系统调用错误
+                 QPlayAuto_CopyRightError=109,               //无法播放,没有版权
+                 QPlayAuto_LoginError=110,                   //无法读取,没有登录
+                 QPlayAuto_PcmRepeat=111,                    //PCM 请求重复
+                 QPlayAuto_NoPermission=112,                 //没有权限
+                 QPlayAuto_NeedBuy = 113,                    //无法播放，需要购买(数字专辑)
+                 QPlayAuto_NotSupportFormat=114,             //无法播放，不支持格式
+                 QPlayAuto_NeedAuth=115,                     //需要授权
+                 QPlayAuto_NeedVIP = 116,                    //无法播放，需要购买VIP
+                 QPlayAuto_TryListen = 117,                  //试听歌曲，购买听完整版
+                 QPlayAuto_TrafficAlert = 118,               //无法播放 流量弹窗阻断
+                 QPlayAuto_OnlyWifi     = 119,               //无法播放 仅Wifi弹窗阻断
+                 QPlayAuto_AlreadyConnected=120,             //已经连接车机
+                 */
+                NSInteger errCode = ((NSNumber *)dict[@"Error"]).integerValue;
+                // 因为版权和 VIP 问题直接反馈播放结束
+                if (errCode == 109 || errCode == 113 || errCode == 116) {
+                    [self callbackStatus:MPlaYerStatusEND];
+                }
             }
             dispatch_semaphore_signal(sema);
         }];
