@@ -19,6 +19,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic , copy) void (^__nullable pcmCallback)(AudioBuffer ioData);
 /// 播放器状态回调
 @property (nonatomic , copy) void (^ __nullable playerStatusCallback)(MPlaYerStatus status);
+/// 播放器进度回调
+@property (nonatomic , copy) void (^ __nullable playerProgressCallback)(float progress);
 
 /// 播放
 - (void) play:(NSString *)mediaId;

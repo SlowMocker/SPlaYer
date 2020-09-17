@@ -28,6 +28,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		FF08BEDA2512EC4B00CE38C5 /* libQPlayAutoSDK.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libQPlayAutoSDK.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		FF08BEDE251303D700CE38C5 /* libMPlaYer.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libMPlaYer.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF3E8A7A2509C56A0098FAF9 /* libSPlaYer.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libSPlaYer.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF3E8A7D2509C56A0098FAF9 /* SPlaYer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SPlaYer.h; sourceTree = "<group>"; };
 		FF3E8A7E2509C56A0098FAF9 /* SPlaYer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SPlaYer.m; sourceTree = "<group>"; };
@@ -82,6 +84,8 @@
 		FF3E8A862509C6720098FAF9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FF08BEDE251303D700CE38C5 /* libMPlaYer.a */,
+				FF08BEDA2512EC4B00CE38C5 /* libQPlayAutoSDK.a */,
 				FF8AAF972510EE33003C491C /* libMPlaYer.a */,
 				FF8AAF992510EE33003C491C /* libQPlayAutoSDK.a */,
 				FF8A9666250F47DF0041926E /* libMPlaYer.a */,

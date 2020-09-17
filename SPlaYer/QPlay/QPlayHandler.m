@@ -18,6 +18,8 @@
 @property (nonatomic , assign) MPlaYerStatus status;
 
 @property (nonatomic , strong) QMediaRequestInfo *requestInfo;
+// seek 后需要重新计算（不支持 seek）
+@property (nonatomic , assign) float didConsumeDataLength;
 @property (nonatomic , strong) QMediaDesc *onePackageDesc;
 
 /// 请求 PCM 队列
@@ -43,6 +45,8 @@
         self.eBufferQueue = [[NSOperationQueue alloc]init];
         self.eBufferQueue.maxConcurrentOperationCount = 1;
         
+        self.didConsumeDataLength = 0;
+        
         // 监听 buffer 回调
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(receiveQueueBufferNullNoti:)
@@ -53,16 +57,16 @@
 }
 
 - (void) receiveQueueBufferNullNoti:(NSNotification *)noti {
+    
+    // 检查是否是最后一个包
+    if (self.dataDidRequestFinish) {
+        return;
+    }
    
     __weak typeof(self) weakSelf = self;
     NSOperation *op = [NSBlockOperation blockOperationWithBlock:^{
         __strong typeof(weakSelf) self = weakSelf;
-        // 检查是否是最后一个包
-        if (self.dataDidRequestFinish) {
-            return;
-        }
 
-        
 //        NSLog(@"*-*开始获取 index: %d", (int)self.requestInfo.nextRequestIndex);
         
         dispatch_semaphore_t sema = dispatch_semaphore_create(0);
@@ -83,7 +87,7 @@
                 NSInteger value = self.requestInfo.didRequestLength - self.requestInfo.totalLength;
                 // 1. 总长超了是最后一个包
 #warning "Maybe Error!!!"
-                // 2. 接收实际 PCM 长度小于 MediaInfo 中标识的总长（无法100%囊括）
+                // 2. 接收实际 PCM 长度小于 MediaInfo 中标识的总长（无法100%囊括）(用了 -3000（默认 asbd 计算大概 0.2s） 来处理，这里实际应该按照 asbd 来计算的)
                 // 3. buffer 填充不满表示最后一个包
                 // 这里 value >= 0 || value > -3000 只是为了更好的描述而已
                 if (value >= 0 || value > -3000 || self.onePackageDesc.length < PCMBufSize) {
@@ -122,10 +126,8 @@
 /// 播放
 - (void) play:(NSString *)mediaId {
     [self callbackStatus:MPlaYerStatusLOADING];
-    
+
     self.dataDidRequestFinish = NO;
-    
-    
     
     // 重置 pcm player
     if (self.mPcmPlayer) {
@@ -139,6 +141,11 @@
     self.requestQueue.suspended = YES;
     // 取消了所有尚未执行的 op【AAA】
     [self.requestQueue cancelAllOperations];
+    
+    if (self.playerProgressCallback) {
+        self.playerProgressCallback(0);
+    }
+    self.didConsumeDataLength = 0;
     
     // 这里只需要确保上一个 mediaId 的最后一次 PCM 请求在 op 之前就可以
     // 将 mediaInfo 的请求也放入了 requestQueue，保证了 MediaInfo 和 PCM 的请求始终串行
@@ -164,10 +171,22 @@
                     __strong typeof(weakSelf) self = weakSelf;
                     NSLog(@"*\n\n\nall buffer null : requestDidFinsh -> %d\n\n\n*", self.dataDidRequestFinish);
                     if (self.dataDidRequestFinish) {
+                        if (self.playerProgressCallback) {
+                            self.playerProgressCallback(1);
+                        }
                         [self callbackStatus:MPlaYerStatusEND];
                         return YES;
                     }
                     return NO;
+                };
+                self.mPcmPlayer.didComsumeDataLengthCallback = ^(int dataLength) {
+                    __strong typeof(weakSelf) self = weakSelf;
+                    if (self.playerProgressCallback) {
+                        self.didConsumeDataLength += dataLength;
+                        float progress = (float)((float)(self.didConsumeDataLength) / self.requestInfo.totalLength);
+                        self.playerProgressCallback(MIN(progress, 1));
+//                        NSLog(@"*\nprogress: %f\n*", progress);
+                    }
                 };
                 [self.mPcmPlayer prepareToPlay:[self asbdFromQDic:dict]];
                 [self.mPcmPlayer play];
@@ -210,7 +229,7 @@
     self.requestQueue.suspended = NO;
     [self.requestQueue addOperation:op];
     
-    // 并发去请求 MediaInfo 和 PCM，造成了 requestID 的混乱（mediaInfo requestID 是 10 ，返回的resultID 却是 11，无法找到正确的回调），最好单个单个请求
+    // 并发去请求 MediaInfo 和 PCM，造成了 requestID 的混乱（mediaInfo requestID 是 10 ，返回的 resultID 却是 11，无法找到正确的回调），最好单个单个请求
 //    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
 //        __weak typeof(self) weakSelf = self;
 //        [[QPlayAutoManager sharedInstance] requestMediaInfo:mediaId callback:^(BOOL success, NSDictionary *dict) {
@@ -247,6 +266,9 @@
 - (void) stop {
     if (self.status != MPlaYerStatusSTOP) {
         [self callbackStatus:MPlaYerStatusSTOP];
+    }
+    if (self.playerProgressCallback) {
+        self.playerProgressCallback(0);
     }
     [self.mPcmPlayer stop];
 }

@@ -42,11 +42,15 @@ typedef NS_ENUM(NSInteger, SourceType) {
         _type = SourceTypeOther;
         self.mPlayer.playerStatusCallback = self.playerStatusCallback;
         self.qPlayHandler.playerStatusCallback = nil;
+        self.qPlayHandler.playerProgressCallback = nil;
+        self.mPlayer.playerProgressCallback = self.playerProgressCallback;
     }
     else {
         _type = SourceTypeQQ;
         self.qPlayHandler.playerStatusCallback = self.playerStatusCallback;
         self.mPlayer.playerStatusCallback = nil;
+        self.qPlayHandler.playerProgressCallback = self.playerProgressCallback;
+        self.mPlayer.playerProgressCallback = nil;
     }
     
     if (_type == SourceTypeQQ) {

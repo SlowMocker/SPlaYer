@@ -18,6 +18,8 @@
 @property (nonatomic , copy) void (^pcmCallback)(AudioBuffer ioData);
 /// 播放器状态回调
 @property (nonatomic , copy) void (^playerStatusCallback)(MPlaYerStatus status);
+/// 播放器进度回调
+@property (nonatomic , copy) void (^playerProgressCallback)(float progress);
 /// 媒体信息回调
 @property (nonatomic , copy) void (^mediaInfoCallback)(NSObject *mediaInfo);
 
