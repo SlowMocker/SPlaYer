@@ -2,8 +2,8 @@
 //  QPlayHandler.m
 //  SPlaYer
 //
-//  Created by iSmicro on 2020/9/10.
-//  Copyright © 2020 iSmicro. All rights reserved.
+//  Created by wuwenhao on 2020/9/10.
+//  Copyright © 2020 MOSI. All rights reserved.
 //
 
 #import "QPlayHandler.h"
