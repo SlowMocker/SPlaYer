@@ -36,5 +36,5 @@
 - (void) stop;
 
 /// 当前只有 Himalaya 支持
-- (void) seekTo:(NSTimeInterval)time;
+- (void) seekTo:(float)progress;
 @end

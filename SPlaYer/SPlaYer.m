@@ -8,10 +8,12 @@
 
 #import "SPlaYer.h"
 #import "QPlayHandler.h"
+#import "MOSISYstemEx.h"
 
 typedef NS_ENUM(NSInteger, SourceType) {
     SourceTypeQQ,
-    SourceTypeOther,
+    SourceTypeHIMALAYA,
+    SourceTypeM3U8,
 };
 
 @interface SPlaYer ()
@@ -39,7 +41,12 @@ typedef NS_ENUM(NSInteger, SourceType) {
 /// 2. Media id （QQ）
 - (void) play:(id)identifier {
     if ([identifier isKindOfClass:[NSURL class]]) {
-        _type = SourceTypeOther;
+        if ([(NSURL *)identifier isAvalidM3U8URL] || [(NSURL *)identifier isAvalidTsNetURL]) {
+            _type = SourceTypeM3U8;
+        }
+        else {
+            _type = SourceTypeHIMALAYA;
+        }
         self.mPlayer.playerStatusCallback = self.playerStatusCallback;
         self.qPlayHandler.playerStatusCallback = nil;
         self.qPlayHandler.playerProgressCallback = nil;
@@ -97,12 +104,9 @@ typedef NS_ENUM(NSInteger, SourceType) {
 }
 
 /// 当前只有 Himalaya 支持
-- (void) seekTo:(NSTimeInterval)time{
-    if (_type == SourceTypeQQ) {
-        return;
-    }
-    else {
-        
+- (void) seekTo:(float)progress{
+    if (_type == SourceTypeHIMALAYA) {
+        [self.mPlayer seekTo:progress];
     }
 }
 
