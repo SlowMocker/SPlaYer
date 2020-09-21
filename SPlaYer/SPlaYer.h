@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "MPlaYer.h"
+#import "Error.h"
 #import "QPlayAutoSDK.h"
 #import "QPlayAutoManager.h"
 

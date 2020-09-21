@@ -110,4 +110,10 @@ typedef NS_ENUM(NSInteger, SourceType) {
     }
 }
 
+- (void) setIsJustFetchPCM:(BOOL)isJustFetchPCM {
+    _isJustFetchPCM = isJustFetchPCM;
+    self.mPlayer.isJustFetchPCM = _isJustFetchPCM;
+    self.qPlayHandler.isJustFetchPCM = _isJustFetchPCM;
+}
+
 @end

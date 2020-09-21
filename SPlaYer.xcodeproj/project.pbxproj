@@ -3,17 +3,17 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FF327D8C2518820C00036C4D /* libMPlaYer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FF8A9666250F47DF0041926E /* libMPlaYer.a */; platformFilter = ios; };
+		FF327D8D2518820C00036C4D /* libQPlayAutoSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FF8A9668250F47DF0041926E /* libQPlayAutoSDK.a */; platformFilter = ios; };
 		FF3E8A7F2509C56A0098FAF9 /* SPlaYer.m in Sources */ = {isa = PBXBuildFile; fileRef = FF3E8A7E2509C56A0098FAF9 /* SPlaYer.m */; };
 		FF3E8A802509C56A0098FAF9 /* SPlaYer.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = FF3E8A7D2509C56A0098FAF9 /* SPlaYer.h */; };
 		FF3E8A8E250A13BA0098FAF9 /* QPlayHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = FF3E8A8D250A13BA0098FAF9 /* QPlayHandler.m */; };
 		FF3E8A91250A183C0098FAF9 /* QMediaDesc.m in Sources */ = {isa = PBXBuildFile; fileRef = FF3E8A90250A183C0098FAF9 /* QMediaDesc.m */; };
 		FF8A95EA250F36640041926E /* SPlaYer.h in Headers */ = {isa = PBXBuildFile; fileRef = FF3E8A7D2509C56A0098FAF9 /* SPlaYer.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		FF8BDEBA25145AF0001D8020 /* libMPlaYer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FF08BEDE251303D700CE38C5 /* libMPlaYer.a */; };
-		FF8BDEBB25145AF0001D8020 /* libQPlayAutoSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FF8A9668250F47DF0041926E /* libQPlayAutoSDK.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -50,8 +50,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FF8BDEBA25145AF0001D8020 /* libMPlaYer.a in Frameworks */,
-				FF8BDEBB25145AF0001D8020 /* libQPlayAutoSDK.a in Frameworks */,
+				FF327D8C2518820C00036C4D /* libMPlaYer.a in Frameworks */,
+				FF327D8D2518820C00036C4D /* libQPlayAutoSDK.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
