@@ -86,7 +86,7 @@
                 
                 NSInteger value = self.requestInfo.didRequestLength - self.requestInfo.totalLength;
                 // 1. 总长超了是最后一个包
-#warning "Maybe Error!!!"
+//#warning "Maybe Error!!!"
                 // 2. 接收实际 PCM 长度小于 MediaInfo 中标识的总长（无法100%囊括）(用了 -3000（默认 asbd 计算大概 0.2s） 来处理，这里实际应该按照 asbd 来计算的)
                 // 3. buffer 填充不满表示最后一个包
                 // 这里 value >= 0 || value > -3000 只是为了更好的描述而已
