@@ -11,8 +11,10 @@
 		FF3E8A802509C56A0098FAF9 /* SPlaYer.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = FF3E8A7D2509C56A0098FAF9 /* SPlaYer.h */; };
 		FF3E8A8E250A13BA0098FAF9 /* QPlayHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = FF3E8A8D250A13BA0098FAF9 /* QPlayHandler.m */; };
 		FF3E8A91250A183C0098FAF9 /* QMediaDesc.m in Sources */ = {isa = PBXBuildFile; fileRef = FF3E8A90250A183C0098FAF9 /* QMediaDesc.m */; };
-		FF433DAA2518D0340041E6D1 /* libMPlaYer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FF8AAF972510EE33003C491C /* libMPlaYer.a */; platformFilter = ios; };
-		FF433DAB2518D0340041E6D1 /* libQPlayAutoSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FF8AAF992510EE33003C491C /* libQPlayAutoSDK.a */; platformFilter = ios; };
+		FF6D79F825272DBA001F4186 /* QPlayHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = FF3E8A8C250A13BA0098FAF9 /* QPlayHandler.h */; };
+		FF6D79F925272DBA001F4186 /* QMediaDesc.h in Headers */ = {isa = PBXBuildFile; fileRef = FF3E8A8F250A183C0098FAF9 /* QMediaDesc.h */; };
+		FF6D79FA25272DC6001F4186 /* libMPlaYer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FF8A9666250F47DF0041926E /* libMPlaYer.a */; platformFilter = ios; };
+		FF6D79FB25272DC6001F4186 /* libQPlayAutoSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FF8A9668250F47DF0041926E /* libQPlayAutoSDK.a */; platformFilter = ios; };
 		FF8A95EA250F36640041926E /* SPlaYer.h in Headers */ = {isa = PBXBuildFile; fileRef = FF3E8A7D2509C56A0098FAF9 /* SPlaYer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
@@ -50,8 +52,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FF433DAA2518D0340041E6D1 /* libMPlaYer.a in Frameworks */,
-				FF433DAB2518D0340041E6D1 /* libQPlayAutoSDK.a in Frameworks */,
+				FF6D79FA25272DC6001F4186 /* libMPlaYer.a in Frameworks */,
+				FF6D79FB25272DC6001F4186 /* libQPlayAutoSDK.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -117,6 +119,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				FF8A95EA250F36640041926E /* SPlaYer.h in Headers */,
+				FF6D79F825272DBA001F4186 /* QPlayHandler.h in Headers */,
+				FF6D79F925272DBA001F4186 /* QMediaDesc.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -307,6 +311,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Libs/QPlay",
 					"$(PROJECT_DIR)/Libs/MPlaYer",
+					"$(SRCROOT)/../MPlaYer_Git/MPlaYer/MPlaYer",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -325,6 +330,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Libs/QPlay",
 					"$(PROJECT_DIR)/Libs/MPlaYer",
+					"$(SRCROOT)/../MPlaYer_Git/MPlaYer/MPlaYer",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
